@@ -17,19 +17,20 @@ export class AppComponent implements OnInit {
 
       ngOnInit() {
         this.bookForm = this.formBuilder.group({
-            name: new FormControl(''),
-            surname: new FormControl(''),
-            mainAuthor: new FormControl({ name: '', surname: ''}),
+            mainAuthor: new FormGroup({
+                name: new FormControl(''),
+                surname: new FormControl('')
+              }),
+            addAuthor: new FormArray([]),
             chapter: new FormControl(''),
             book: new FormControl('', Validators.required),
-            booktype: new FormControl(''),
+            bookType: new FormControl(''),
             city: new FormControl('', Validators.required),
             publish: new FormControl('', Validators.required),
             year: new FormControl('', Validators.required),
             page: new FormControl('', Validators.required),
             ISBN: new FormControl(''),
-            type: new FormControl('book'),
-            addAuthor: new FormArray([new FormControl(123)]),
+            type: new FormControl('book')
           });
       
         this.onChanges();
@@ -41,11 +42,18 @@ export class AppComponent implements OnInit {
             if (this.bookForm.valid)
             {
                 this.errorMessage = "";
-                var chapter = val.chapter == '' ? '' : "— ${val.chapter} // ";
-                var ISBN = val.ISBN == '' ? '' : "— ${val.ISBN}.";
-                var bookType = val.bookType == '' ? '' : ": ${val.bookType} ";
+                var chapter = val.chapter == '' ? '' : `— ${val.chapter} // `;
+                var ISBN = val.ISBN == '' ? '' : `— ${val.ISBN}.`;
+                var bookType = val.bookType == '' ? '' : `: ${val.bookType} `;
+                var mainAuthorAtStart = (val.mainAuthor.surname == '' && val.mainAuthor.name == '') || this.bookForm.get('addAuthor')["controls"].length > 2 ? '' : `${val.mainAuthor.surname}, ${val.mainAuthor.name} `;
+                var mainAuthorAtEnd = val.mainAuthor.surname == '' && val.mainAuthor.name == '' ? '' : `/ ${val.mainAuthor.name} ${val.mainAuthor.surname}`;
+                for (let control of this.bookForm.get('addAuthor')["controls"]) {
+                    mainAuthorAtEnd += `,${control.value.name} ${control.value.surname} `
+                }
+                mainAuthorAtEnd += '. ';
+                
                 this.reference =
-                `${val.surname}, ${val.name}  ${chapter}${val.book} [Текст] ${bookType}/ ${val.name} ${val.surname} — ${val.city} : ${val.publish}, ${val.year}. — ${val.page} с.${ISBN}`;
+                `${mainAuthorAtStart}${chapter}${val.book} [Текст] ${bookType} ${mainAuthorAtEnd}— ${val.city} : ${val.publish}, ${val.year}. — ${val.page} с.${ISBN}`;
             }
             else
             {
@@ -59,11 +67,32 @@ export class AppComponent implements OnInit {
         alert("type changed")
       }
 
-      addReference(): void {
+    addReference(): void {
         if (this.reference != '' && this.formValid)
         {
             this.referenceList.push(this.reference);
         }
+    }
+
+    deleteReference(index): void {
+        if (typeof this.referenceList[index] !== 'undefined') {
+            this.referenceList.splice(index, 1);
+        }
+    }
+    
+    addAdditionalAuthors(): void {
+        let control = <FormArray>this.bookForm.controls.addAuthor;
+        control.push(
+            new FormGroup({
+                name: new FormControl(''),
+                surname: new FormControl('')
+              })
+        )
+    }
+    
+    deleteAdditionalAuthors(index): void {
+        let control = <FormArray>this.bookForm.controls.addAuthor;
+        control.removeAt(index);
     }
 }
 

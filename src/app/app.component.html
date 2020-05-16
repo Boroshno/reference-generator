@@ -10,24 +10,51 @@
                 </select>
             </div>
             <label class="col-form-label">Головний автор:</label><br/>
-            <div class="div-group">
+            <div class="div-group"  formGroupName="mainAuthor">
                 <div class="form-group-padding row form-group-padding">
                     <div class="col-sm-2">
-                        <label for="inputSurname" class="col-form-label">Прізвище</label>
+                        <label for="inputMainSurname" class="col-form-label">Прізвище</label>
                     </div>
                     <div class="col-sm-10">
-                        <input formControlName="mainAuthor.surname" class="form-control" id="inputSurname" placeholder="surname" name="surname" required>
+                        <input formControlName="surname" class="form-control" id="inputMainSurname" placeholder="surname" name="mainAuthor.surname">
                     </div>
                 </div>
                 <div class="form-group row form-group-padding">
                     <div class="col-sm-2">
-                        <label for="inputName" class="col-form-label">Ініціали</label>
+                        <label for="inputMainName" class="col-form-label">Ініціали</label>
                     </div>
                     <div class="col-sm-10">
-                        <input formControlName="mainAuthor.name" class="form-control" id="inputName" placeholder="name" name="name" required>
+                        <input formControlName="name" class="form-control" id="inputMainName" placeholder="name" name="mainAuthor.name">
                     </div>
                 </div>
             </div>
+            <ng-container formArrayName="addAuthor">
+                <div *ngFor="let auth of bookForm.get('addAuthor')['controls']; let i=index">
+                    <div [formGroupName]="i">
+                        <label class="col-form-label">Ще автор:</label><br/>
+                        <div class="div-group">
+                            <div class="form-group-padding row form-group-padding">
+                                <div class="col-sm-2">
+                                    <label for="inputSurname" class="col-form-label">Прізвище</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input formControlName="surname" class="form-control" id="inputSurname" placeholder="surname" name="surname">
+                                </div>
+                            </div>
+                            <div class="form-group row form-group-padding">
+                                <div class="col-sm-2">
+                                    <label for="inputName" class="col-form-label">Ініціали</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <input formControlName="name" class="form-control" id="inputName" placeholder="name" name="name">
+                                </div>
+                            </div>
+                            <button class="btn  btn-danger btn-sm rounded-0 authorbtn" (click)="deleteAdditionalAuthors(i)">Видалити</button>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <button class="btn btn-default authorbtn" (click)="addAdditionalAuthors()">Додати автора</button>
             <div class="form-group row form-group-padding">
                 <div class="col-sm-2">
                     <label for="inputChapter" class="col-form-label">Частина книги</label>
@@ -46,10 +73,10 @@
             </div>
             <div class="form-group row form-group-padding">
                 <div class="col-sm-2">
-                    <label for="inputBookType" class="col-form-label">Тип книги</label>
+                    <label for="inputBookType" class="col-form-label">Тип книги/переклад/редація</label>
                 </div>
                 <div class="col-sm-10">
-                    <input formControlName="booktype" class="form-control" id="inputBookType" placeholder="booktype" name="booktype">
+                    <input formControlName="bookType" class="form-control" id="inputBookType" placeholder="booktype" name="booktype">
                 </div>
             </div>
             <div class="form-group row form-group-padding">
@@ -78,7 +105,7 @@
             </div>
             <div class="form-group row form-group-padding">
                 <div class="col-sm-2">
-                    <label for="inputPage" class="col-form-label">Видання<span class="red-star">*</span></label>
+                    <label for="inputPage" class="col-form-label">Сторінки<span class="red-star">*</span></label>
                 </div>
                 <div class="col-sm-10">
                     <input formControlName="page" class="form-control" id="inputPage" placeholder="page" name="page">
@@ -95,13 +122,14 @@
          </form>
     </div>
     <div class="column">
-        <div *ngFor="let ref of referenceList">
-                <label>{{ref}}</label>
+        <div *ngFor="let ref of referenceList; let i=index" style="margin-bottom:10px;">
+                <label>{{ref}}</label> 
+                <button class="btn btn-danger btn-sm rounded-0" style="margin-left:20px;" type="button" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"  (click)="deleteReference(i)">X</button>
         </div>
 
         <label style="color:red;">{{errorMessage}}</label>
         <label class="current-reference">{{reference}}</label><br/>
-        <button class="btn btn-default" (click)="addReference()" *ngIf="formValid">Добавить</button>
+        <button class="btn btn-default" (click)="addReference()" *ngIf="formValid">Додати посилання до списку</button>
     </div>
 </div>
  

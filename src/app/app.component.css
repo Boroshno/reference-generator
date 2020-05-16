@@ -33,3 +33,7 @@ input.ng-invalid{
     padding-top: 20px;
     border-top: double;
 }
+.authorbtn {
+    margin-top: 10px;
+    margin-left: 125px;
+}
