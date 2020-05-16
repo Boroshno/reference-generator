@@ -1,0 +1,35 @@
+.column {
+    float: left;
+    width: 47%;
+    margin: 20px;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .form {
+    width:80%; 
+    margin:20px;
+  }
+  .red-star{
+    color:red;
+    padding: 0px;
+    }
+input.ng-invalid{
+    background-color: #ffd8d8;
+}
+.div-group {
+    border-style: ridge;
+    padding: 12px;
+}
+.form-group-padding {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.current-reference {
+    padding-top: 20px;
+    border-top: double;
+}
