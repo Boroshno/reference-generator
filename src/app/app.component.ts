@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
         this.bookForm = this.formBuilder.group({
             name: new FormControl(''),
             surname: new FormControl(''),
+            mainAuthor: new FormControl({ name: '', surname: ''}),
             chapter: new FormControl(''),
             book: new FormControl('', Validators.required),
             booktype: new FormControl(''),
