@@ -54,7 +54,12 @@
                     </div>
                 </div>
             </ng-container>
-            <button class="btn btn-default authorbtn" (click)="addAdditionalAuthors()">Додати автора</button>
+            <div class="form-group row form-group-padding">
+                <button class="btn btn-default authorbtn" (click)="addAdditionalAuthors()" style="float: left;">Додати автора</button>
+                <div style="float: left; margin-left: 20px; margin-top: 20px;">
+                    <input type="checkbox" formControlName="other" class="checkbox"  style="float: left;" id="inputOther" placeholder="other" name="otehr"/>  та інші
+                </div>
+            </div>
             <div class="form-group row form-group-padding">
                 <div class="col-sm-2">
                     <label for="inputChapter" class="col-form-label">Частина книги</label>

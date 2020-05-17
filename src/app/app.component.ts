@@ -31,7 +31,8 @@ export class AppComponent implements OnInit {
             year: new FormControl('', Validators.required),
             page: new FormControl('', Validators.required),
             ISBN: new FormControl(''),
-            type: new FormControl('book')
+            type: new FormControl('book'),
+            other: new FormControl(false)
           });
       
         this.onChanges();
@@ -47,19 +48,16 @@ export class AppComponent implements OnInit {
                 var ISBN = val.ISBN == '' ? '' : `— ${val.ISBN}.`;
                 var bookType = val.bookType == '' ? '' : `: ${val.bookType}`;
                 var mainAuthorAtStart = (val.mainAuthor.surname == '' && val.mainAuthor.name == '') || this.bookForm.get('addAuthor')["controls"].length > 2 ? '' : `${val.mainAuthor.surname}, ${val.mainAuthor.name} `;
-                var mainAuthorAtEnd = val.mainAuthor.surname == '' && val.mainAuthor.name == '' ? '' : `/ ${val.mainAuthor.name} ${val.mainAuthor.surname}`;
-                if (mainAuthorAtEnd != '' && this.bookForm.get('addAuthor')["controls"].length > 0)
-                {
-                    mainAuthorAtEnd += ', ';
-                }
+                var AuthorsAtEnd = val.mainAuthor.surname == '' && val.mainAuthor.name == '' ? '' : `/ ${val.mainAuthor.name} ${val.mainAuthor.surname}`;
                 for (let control of this.bookForm.get('addAuthor')["controls"]) {
                     
-                    mainAuthorAtEnd += `, ${control.value.name} ${control.value.surname}`
+                    AuthorsAtEnd += `, ${control.value.name} ${control.value.surname}`
                 }
-                var redaction = val.redaction == '' ? '' : (mainAuthorAtEnd == '' ? `/ ${val.redaction}. ` : `; ${val.redaction}`);
+                var other = val.other ? " [та інші]" : "";
+                var redaction = val.redaction == '' ? '' : (AuthorsAtEnd == '' ? `/ ${val.redaction}. ` : `; ${val.redaction}`);
                 
                 this.reference =
-                `${mainAuthorAtStart}${chapter}${val.book} [Текст] ${bookType} ${mainAuthorAtEnd}${redaction}. — ${val.city} : ${val.publish}, ${val.year}. — ${val.page} с.${ISBN}`;
+                `${mainAuthorAtStart}${chapter}${val.book} [Текст] ${bookType} ${AuthorsAtEnd}${other}${redaction}. — ${val.city} : ${val.publish}, ${val.year}. — ${val.page} с.${ISBN}`;
             }
             else
             {
