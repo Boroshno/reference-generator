@@ -12,11 +12,14 @@ export class AppComponent implements OnInit {
     errorMessage: string;
     referenceList: string[] = [];
     formValid: boolean;
+    showAuthorNamesInput: boolean;
 
     constructor(private formBuilder: FormBuilder) {}
 
       ngOnInit() {
         this.bookForm = this.formBuilder.group({
+            isOrgAuth: new FormControl(false),
+            orgAuthor: new FormControl(''),
             mainAuthor: new FormGroup({
                 name: new FormControl(''),
                 surname: new FormControl('')
@@ -40,20 +43,35 @@ export class AppComponent implements OnInit {
 
       onChanges(): void {
         this.bookForm.valueChanges.subscribe(val => {
+            this.showAuthorNamesInput = this.bookForm.get('isOrgAuth').value;
             this.formValid = this.bookForm.valid;
+
             if (this.bookForm.valid)
             {
                 this.errorMessage = "";
                 var chapter = val.chapter == '' ? '' : `— ${val.chapter} // `;
                 var ISBN = val.ISBN == '' ? '' : `— ${val.ISBN}.`;
                 var bookType = val.bookType == '' ? '' : `: ${val.bookType}`;
-                var mainAuthorAtStart = (val.mainAuthor.surname == '' && val.mainAuthor.name == '') || this.bookForm.get('addAuthor')["controls"].length > 2 ? '' : `${val.mainAuthor.surname}, ${val.mainAuthor.name} `;
-                var AuthorsAtEnd = val.mainAuthor.surname == '' && val.mainAuthor.name == '' ? '' : `/ ${val.mainAuthor.name} ${val.mainAuthor.surname}`;
-                for (let control of this.bookForm.get('addAuthor')["controls"]) {
-                    
-                    AuthorsAtEnd += `, ${control.value.name} ${control.value.surname}`
+
+                //authors
+                if (!val.isOrgAuth)
+                {
+                    var mainAuthorAtStart = (val.mainAuthor.surname == '' && val.mainAuthor.name == '') || this.bookForm.get('addAuthor')["controls"].length > 2 ? '' : `${val.mainAuthor.surname}, ${val.mainAuthor.name} `;
+                    var AuthorsAtEnd = val.mainAuthor.surname == '' && val.mainAuthor.name == '' ? '' : `/ ${val.mainAuthor.name} ${val.mainAuthor.surname}`;
+                    for (let control of this.bookForm.get('addAuthor')["controls"]) {
+                        
+                        AuthorsAtEnd += `, ${control.value.name} ${control.value.surname}`
+                    }
+                    var other = val.other ? " [та інші]" : "";
                 }
-                var other = val.other ? " [та інші]" : "";
+                else
+                {
+                    mainAuthorAtStart = '';
+                    AuthorsAtEnd = `/ ${val.orgAuthor}`;
+                    other = '';
+                }
+
+
                 var redaction = val.redaction == '' ? '' : (AuthorsAtEnd == '' ? `/ ${val.redaction}. ` : `; ${val.redaction}`);
                 
                 this.reference =

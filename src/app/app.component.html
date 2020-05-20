@@ -9,55 +9,75 @@
                         <option value="book" (change)="changeType($event)" selected="selected">Книга</option>
                 </select>
             </div>
-            <label class="col-form-label">Головний автор:</label><br/>
-            <div class="div-group"  formGroupName="mainAuthor">
-                <div class="form-group-padding row form-group-padding">
-                    <div class="col-sm-2">
-                        <label for="inputMainSurname" class="col-form-label">Прізвище</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <input formControlName="surname" class="form-control" id="inputMainSurname" placeholder="surname" name="mainAuthor.surname">
-                    </div>
+            <div class="form-group row form-group-padding">
+                <div class="col-sm-2">
+                    <label for="isOrgAuth" class="col-form-label">Автором є організація</label>
                 </div>
-                <div class="form-group row form-group-padding">
-                    <div class="col-sm-2">
-                        <label for="inputMainName" class="col-form-label">Ініціали</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <input formControlName="name" class="form-control" id="inputMainName" placeholder="name" name="mainAuthor.name">
-                    </div>
+                <div style="float: left; margin-left: 20px; margin-top: 20px;">
+                    <input type="checkbox" formControlName="isOrgAuth" class="checkbox"  style="float: left;" id="isOrgAuth" placeholder="isOrgAuth" name="isOrgAuth"/>
                 </div>
             </div>
-            <ng-container formArrayName="addAuthor">
-                <div *ngFor="let auth of bookForm.get('addAuthor')['controls']; let i=index">
-                    <div [formGroupName]="i">
-                        <label class="col-form-label">Ще автор:</label><br/>
-                        <div class="div-group">
-                            <div class="form-group-padding row form-group-padding">
-                                <div class="col-sm-2">
-                                    <label for="inputSurname" class="col-form-label">Прізвище</label>
-                                </div>
-                                <div class="col-sm-10">
-                                    <input formControlName="surname" class="form-control" id="inputSurname" placeholder="surname" name="surname">
-                                </div>
-                            </div>
-                            <div class="form-group row form-group-padding">
-                                <div class="col-sm-2">
-                                    <label for="inputName" class="col-form-label">Ініціали</label>
-                                </div>
-                                <div class="col-sm-10">
-                                    <input formControlName="name" class="form-control" id="inputName" placeholder="name" name="name">
-                                </div>
-                            </div>
-                            <button class="btn  btn-danger btn-sm rounded-0 authorbtn" (click)="deleteAdditionalAuthors(i)">Видалити</button>
+            <div *ngIf="!showAuthorNamesInput">
+                <label class="col-form-label">Головний автор:</label><br/>
+                <div class="div-group"  formGroupName="mainAuthor">
+                    <div class="form-group-padding row form-group-padding">
+                        <div class="col-sm-2">
+                            <label for="inputMainSurname" class="col-form-label">Прізвище</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input formControlName="surname" class="form-control" id="inputMainSurname" placeholder="surname" name="mainAuthor.surname">
+                        </div>
+                    </div>
+                    <div class="form-group row form-group-padding">
+                        <div class="col-sm-2">
+                            <label for="inputMainName" class="col-form-label">Ініціали</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input formControlName="name" class="form-control" id="inputMainName" placeholder="name" name="mainAuthor.name">
                         </div>
                     </div>
                 </div>
-            </ng-container>
-            <div class="form-group row form-group-padding">
-                <button class="btn btn-default authorbtn" (click)="addAdditionalAuthors()" style="float: left;">Додати автора</button>
-                <div style="float: left; margin-left: 20px; margin-top: 20px;">
-                    <input type="checkbox" formControlName="other" class="checkbox"  style="float: left;" id="inputOther" placeholder="other" name="otehr"/>  та інші
+                <ng-container formArrayName="addAuthor">
+                    <div *ngFor="let auth of bookForm.get('addAuthor')['controls']; let i=index">
+                        <div [formGroupName]="i">
+                            <label class="col-form-label">Ще автор:</label><br/>
+                            <div class="div-group">
+                                <div class="form-group-padding row form-group-padding">
+                                    <div class="col-sm-2">
+                                        <label for="inputSurname" class="col-form-label">Прізвище</label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <input formControlName="surname" class="form-control" id="inputSurname" placeholder="surname" name="surname">
+                                    </div>
+                                </div>
+                                <div class="form-group row form-group-padding">
+                                    <div class="col-sm-2">
+                                        <label for="inputName" class="col-form-label">Ініціали</label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <input formControlName="name" class="form-control" id="inputName" placeholder="name" name="name">
+                                    </div>
+                                </div>
+                                <button class="btn  btn-danger btn-sm rounded-0 authorbtn" (click)="deleteAdditionalAuthors(i)">Видалити</button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <div class="form-group row form-group-padding">
+                    <button class="btn btn-default authorbtn" (click)="addAdditionalAuthors()" style="float: left;">Додати автора</button>
+                    <div style="float: left; margin-left: 20px; margin-top: 20px;">
+                        <input type="checkbox" formControlName="other" class="checkbox"  style="float: left;" id="inputOther" placeholder="other" name="otehr"/>  та інші
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="showAuthorNamesInput">
+                <div class="form-group-padding row form-group-padding">
+                    <div class="col-sm-2">
+                        <label for="orgAuthor" class="col-form-label">Організація як автор</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input formControlName="orgAuthor" class="form-control" id="orgAuthor" placeholder="orgAuthor" name="orgAuthor">
+                    </div>
                 </div>
             </div>
             <div class="form-group row form-group-padding">
@@ -78,7 +98,7 @@
             </div>
             <div class="form-group row form-group-padding">
                 <div class="col-sm-2">
-                    <label for="inputBookType" class="col-form-label">Тип книги/переклад/редація</label>
+                    <label for="inputBookType" class="col-form-label">Тип книги/переклад</label>
                 </div>
                 <div class="col-sm-10">
                     <input formControlName="bookType" class="form-control" id="inputBookType" placeholder="booktype" name="booktype">
