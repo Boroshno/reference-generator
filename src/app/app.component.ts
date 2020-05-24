@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
             journal: new FormControl(''),
             journalDetails: new FormControl(''),
             journalPlace: new FormControl(''),
+            journalYear: new FormControl(''),
             city: new FormControl('', Validators.required),
             publish: new FormControl(''),
             year: new FormControl('', Validators.required),
@@ -82,9 +83,10 @@ export class AppComponent implements OnInit {
                 var journal = val.journal == '' ? '' : ` // ${val.journal}`;
                 var journalDetails = val.journalDetails == '' ? '' : ` : ${val.journalDetails}`;
                 var journalPlace = val.journalPlace == '' ? '' : ` / ${val.journalPlace}`;
+                var journalYear = val.journalPlace == '' ? '' : ` — ${val.journalPlace}.`;
                 
                 this.reference =
-                `${mainAuthorAtStart}${chapter}${val.book}${documentType} ${bookType} ${AuthorsAtEnd}${other}${redaction}${journal}${journalDetails}${journalPlace}. — ${val.city}${publisher}, ${val.year}. — ${val.page} с.${ISBN}`;
+                `${mainAuthorAtStart}${chapter}${val.book}${documentType} ${bookType} ${AuthorsAtEnd}${other}${redaction}${journal}${journalDetails}${journalPlace}. — ${val.city}${publisher}, ${val.year}.${journalYear} — ${val.page} с.${ISBN}`;
             }
             else
             {
