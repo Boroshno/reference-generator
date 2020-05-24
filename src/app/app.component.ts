@@ -96,10 +96,6 @@ export class AppComponent implements OnInit {
         });
       }
 
-      changeType(e) {
-        alert("type changed")
-      }
-
     addReference(): void {
         if (this.reference != '' && this.formValid)
         {

@@ -3,14 +3,6 @@
         <form class="form" [formGroup]="bookForm">
             <div class="form-group row form-group-padding">
                 <div class="col-sm-2">
-                    <label for="inputSurname" class="col-form-label">Тип джерела</label>
-                </div>
-                <select class="custom-select" formControlName="type">
-                        <option value="book" (change)="changeType($event)" selected="selected">Книга</option>
-                </select>
-            </div>
-            <div class="form-group row form-group-padding">
-                <div class="col-sm-2">
                     <label for="isOrgAuth" class="col-form-label">Автором є організація</label>
                 </div>
                 <div style="float: left; margin-left: 20px; margin-top: 20px;">
