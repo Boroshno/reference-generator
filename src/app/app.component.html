@@ -14,7 +14,7 @@
                     <label for="isOrgAuth" class="col-form-label">Автором є організація</label>
                 </div>
                 <div style="float: left; margin-left: 20px; margin-top: 20px;">
-                    <input type="checkbox" formControlName="isOrgAuth" class="checkbox"  style="float: left;" id="isOrgAuth" placeholder="isOrgAuth" name="isOrgAuth"/>
+                    <input type="checkbox" formControlName="isOrgAuth" class="checkbox"  style="float: left;" id="isOrgAuth" name="isOrgAuth"/>
                 </div>
             </div>
             <div *ngIf="!showAuthorNamesInput">
@@ -25,7 +25,7 @@
                             <label for="inputMainSurname" class="col-form-label">Прізвище</label>
                         </div>
                         <div class="col-sm-10">
-                            <input formControlName="surname" class="form-control" id="inputMainSurname" placeholder="surname" name="mainAuthor.surname">
+                            <input formControlName="surname" class="form-control" id="inputMainSurname" placeholder="Петренко" name="mainAuthor.surname">
                         </div>
                     </div>
                     <div class="form-group row form-group-padding">
@@ -33,7 +33,7 @@
                             <label for="inputMainName" class="col-form-label">Ініціали</label>
                         </div>
                         <div class="col-sm-10">
-                            <input formControlName="name" class="form-control" id="inputMainName" placeholder="name" name="mainAuthor.name">
+                            <input formControlName="name" class="form-control" id="inputMainName" placeholder="Д. П." name="mainAuthor.name">
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                                         <label for="inputSurname" class="col-form-label">Прізвище</label>
                                     </div>
                                     <div class="col-sm-10">
-                                        <input formControlName="surname" class="form-control" id="inputSurname" placeholder="surname" name="surname">
+                                        <input formControlName="surname" class="form-control" id="inputSurname" placeholder="Однороженко" name="surname">
                                     </div>
                                 </div>
                                 <div class="form-group row form-group-padding">
@@ -55,7 +55,7 @@
                                         <label for="inputName" class="col-form-label">Ініціали</label>
                                     </div>
                                     <div class="col-sm-10">
-                                        <input formControlName="name" class="form-control" id="inputName" placeholder="name" name="name">
+                                        <input formControlName="name" class="form-control" id="inputName" placeholder="В. І." name="name">
                                     </div>
                                 </div>
                                 <button class="btn  btn-danger btn-sm rounded-0 authorbtn" (click)="deleteAdditionalAuthors(i)">Видалити</button>
@@ -66,7 +66,7 @@
                 <div class="form-group row form-group-padding">
                     <button class="btn btn-default authorbtn" (click)="addAdditionalAuthors()" style="float: left;">Додати автора</button>
                     <div style="float: left; margin-left: 20px; margin-top: 20px;">
-                        <input type="checkbox" formControlName="other" class="checkbox"  style="float: left;" id="inputOther" placeholder="other" name="otehr"/>  та інші
+                        <input type="checkbox" formControlName="other" class="checkbox"  style="float: left;" id="inputOther" name="otehr"/>  та інші
                     </div>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                         <label for="orgAuthor" class="col-form-label">Організація як автор</label>
                     </div>
                     <div class="col-sm-10">
-                        <input formControlName="orgAuthor" class="form-control" id="orgAuthor" placeholder="orgAuthor" name="orgAuthor">
+                        <input formControlName="orgAuthor" class="form-control" id="orgAuthor" placeholder="Інститут низьких температур" name="orgAuthor">
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
                     <label for="inputChapter" class="col-form-label">Частина книги</label>
                 </div>
                 <div class="col-sm-10">
-                    <input formControlName="chapter" class="form-control" id="inputChapter" placeholder="chapter" name="chapter">
+                    <input formControlName="chapter" class="form-control" id="inputChapter" placeholder="Розділ 1" name="chapter">
                 </div>
             </div>
             <div class="form-group row form-group-padding">
@@ -93,7 +93,7 @@
                     <label for="inputBook" class="col-form-label">Назва книги/статті<span class="red-star">*</span></label>
                 </div>
                 <div class="col-sm-10">
-                    <input formControlName="book" class="form-control" id="inputBook" placeholder="book" name="book" required>
+                    <input formControlName="book" class="form-control" id="inputBook" placeholder="Кобзар" name="book" required>
                 </div>
             </div>
             <div class="form-group row form-group-padding">
@@ -112,10 +112,10 @@
             </div>
             <div class="form-group row form-group-padding">
                 <div class="col-sm-2">
-                    <label for="inputBookType" class="col-form-label">Тип книги/переклад</label>
+                    <label for="inputBookType" class="col-form-label">Опис книги/переклад</label>
                 </div>
                 <div class="col-sm-10">
-                    <input formControlName="bookType" class="form-control" id="inputBookType" placeholder="booktype" name="booktype">
+                    <input formControlName="bookType" class="form-control" id="inputBookType" placeholder="у 10 т." name="booktype">
                 </div>
             </div>
             <div class="form-group row form-group-padding">
@@ -131,7 +131,7 @@
                     <label for="inputCity" class="col-form-label">Місто видання<span class="red-star">*</span></label>
                 </div>
                 <div class="col-sm-10">
-                    <input formControlName="city" class="form-control" id="inputCity" placeholder="city" name="city">
+                    <input formControlName="city" class="form-control" id="inputCity" placeholder="Харків" name="city">
                 </div>
             </div>
             <div class="form-group row form-group-padding">
@@ -139,7 +139,7 @@
                     <label for="inputPublish" class="col-form-label">Видавництво<span class="red-star">*</span></label>
                 </div>
                 <div class="col-sm-10">
-                    <input formControlName="publish" class="form-control" id="inputPublish" placeholder="publish" name="publish">
+                    <input formControlName="publish" class="form-control" id="inputPublish" placeholder="Видавництво Наукова думка" name="publish">
                 </div>
             </div>
             <div class="form-group row form-group-padding">
@@ -147,7 +147,7 @@
                     <label for="inputYear" class="col-form-label">Рік видання<span class="red-star">*</span></label>
                 </div>
                 <div class="col-sm-10">
-                    <input formControlName="year" class="form-control" id="inputYear" placeholder="year" name="year">
+                    <input formControlName="year" class="form-control" id="inputYear" placeholder="2020" name="year">
                 </div>
             </div>
             <div class="form-group row form-group-padding">
@@ -155,7 +155,7 @@
                     <label for="inputPage" class="col-form-label">Сторінки<span class="red-star">*</span></label>
                 </div>
                 <div class="col-sm-10">
-                    <input formControlName="page" class="form-control" id="inputPage" placeholder="page" name="page">
+                    <input formControlName="page" class="form-control" id="inputPage" placeholder="22" name="page">
                 </div>
             </div>
             <div class="form-group row form-group-padding">
@@ -163,7 +163,7 @@
                     <label for="inputISBN" class="col-form-label">ISBN</label>
                 </div>
                 <div class="col-sm-10">
-                    <input formControlName="ISBN" class="form-control" id="inputISBN" placeholder="ISBN" name="ISBN">
+                    <input formControlName="ISBN" class="form-control" id="inputISBN" placeholder="ISBN 978-123-45-678-9" name="ISBN">
                 </div>
             </div>
          </form>
