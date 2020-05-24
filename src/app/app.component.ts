@@ -27,10 +27,11 @@ export class AppComponent implements OnInit {
             addAuthor: new FormArray([]),
             chapter: new FormControl(''),
             book: new FormControl('', Validators.required),
+            bookTypeText: new FormControl(''),
             bookType: new FormControl(''),
             redaction: new FormControl(''),
             city: new FormControl('', Validators.required),
-            publish: new FormControl('', Validators.required),
+            publish: new FormControl(''),
             year: new FormControl('', Validators.required),
             page: new FormControl('', Validators.required),
             ISBN: new FormControl(''),
@@ -52,6 +53,8 @@ export class AppComponent implements OnInit {
                 var chapter = val.chapter == '' ? '' : `— ${val.chapter} // `;
                 var ISBN = val.ISBN == '' ? '' : `— ${val.ISBN}.`;
                 var bookType = val.bookType == '' ? '' : `: ${val.bookType}`;
+                var documentType = val.bookTypeText == '' ? '' : ` [${val.bookTypeText}]`;
+                var publisher = ` : ${val.publish}`;
 
                 //authors
                 if (!val.isOrgAuth)
@@ -75,7 +78,7 @@ export class AppComponent implements OnInit {
                 var redaction = val.redaction == '' ? '' : (AuthorsAtEnd == '' ? `/ ${val.redaction}. ` : `; ${val.redaction}`);
                 
                 this.reference =
-                `${mainAuthorAtStart}${chapter}${val.book} [Текст] ${bookType} ${AuthorsAtEnd}${other}${redaction}. — ${val.city} : ${val.publish}, ${val.year}. — ${val.page} с.${ISBN}`;
+                `${mainAuthorAtStart}${chapter}${val.book}${documentType} ${bookType} ${AuthorsAtEnd}${other}${redaction}. — ${val.city}${publisher}, ${val.year}. — ${val.page} с.${ISBN}`;
             }
             else
             {

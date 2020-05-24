@@ -90,10 +90,24 @@
             </div>
             <div class="form-group row form-group-padding">
                 <div class="col-sm-2">
-                    <label for="inputBook" class="col-form-label">Назва книги<span class="red-star">*</span></label>
+                    <label for="inputBook" class="col-form-label">Назва книги/статті<span class="red-star">*</span></label>
                 </div>
                 <div class="col-sm-10">
                     <input formControlName="book" class="form-control" id="inputBook" placeholder="book" name="book" required>
+                </div>
+            </div>
+            <div class="form-group row form-group-padding">
+                <div class="col-sm-2">
+                    <label for="inputSurname" class="col-form-label">Тип інформації в джерелі</label>
+                </div>
+                <div class="col-sm-10">
+                    <select class="custom-select" formControlName="bookTypeText">
+                            <option value="">Виберіть тип інформації</option>
+                            <option value="Текст" selected="selected">Текст</option>
+                            <option value="Електронний ресурс" selected="selected">Електронний ресурс</option>
+                            <option value="Карти" selected="selected">Карти</option>
+                            <option value="Рукопис" selected="selected">Рукопис</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group row form-group-padding">
@@ -106,7 +120,7 @@
             </div>
             <div class="form-group row form-group-padding">
                 <div class="col-sm-2">
-                    <label for="inputRedaction" class="col-form-label">Під редакцією</label>
+                    <label for="inputRedaction" class="col-form-label">Під редакцією / установа</label>
                 </div>
                 <div class="col-sm-10">
                     <input formControlName="redaction" class="form-control" id="inputRedaction" placeholder="під ред. Імярек" name="redaction">
