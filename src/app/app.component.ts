@@ -30,6 +30,9 @@ export class AppComponent implements OnInit {
             bookTypeText: new FormControl(''),
             bookType: new FormControl(''),
             redaction: new FormControl(''),
+            journal: new FormControl(''),
+            journalDetails: new FormControl(''),
+            journalPlace: new FormControl(''),
             city: new FormControl('', Validators.required),
             publish: new FormControl(''),
             year: new FormControl('', Validators.required),
@@ -50,7 +53,7 @@ export class AppComponent implements OnInit {
             if (this.bookForm.valid)
             {
                 this.errorMessage = "";
-                var chapter = val.chapter == '' ? '' : `— ${val.chapter} // `;
+                var chapter = val.chapter == '' ? '' : ` ${val.chapter} // `;
                 var ISBN = val.ISBN == '' ? '' : `— ${val.ISBN}.`;
                 var bookType = val.bookType == '' ? '' : `: ${val.bookType}`;
                 var documentType = val.bookTypeText == '' ? '' : ` [${val.bookTypeText}]`;
@@ -76,9 +79,12 @@ export class AppComponent implements OnInit {
 
 
                 var redaction = val.redaction == '' ? '' : (AuthorsAtEnd == '' ? `/ ${val.redaction}. ` : `; ${val.redaction}`);
+                var journal = val.journal == '' ? '' : ` // ${val.journal}`;
+                var journalDetails = val.journalDetails == '' ? '' : ` : ${val.journalDetails}`;
+                var journalPlace = val.journalPlace == '' ? '' : ` / ${val.journalPlace}`;
                 
                 this.reference =
-                `${mainAuthorAtStart}${chapter}${val.book}${documentType} ${bookType} ${AuthorsAtEnd}${other}${redaction}. — ${val.city}${publisher}, ${val.year}. — ${val.page} с.${ISBN}`;
+                `${mainAuthorAtStart}${chapter}${val.book}${documentType} ${bookType} ${AuthorsAtEnd}${other}${redaction}${journal}${journalDetails}${journalPlace}. — ${val.city}${publisher}, ${val.year}. — ${val.page} с.${ISBN}`;
             }
             else
             {
